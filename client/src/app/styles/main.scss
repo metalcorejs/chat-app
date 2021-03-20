@@ -1,0 +1,25 @@
+@import "./fonts";
+@import "./normalize";
+@import "./reset";
+@import "./utils";
+@import "../ui/text_field/text_field";
+@import "../pages/signin/signin";
+
+:root {
+  --main-font: Montserrat, sans-serif;
+  --main-font-size: 1rem;
+  --main-font-weight: 400;
+  --main-font-style: normal;
+  --drk-shade-100: #1f2041;
+  --drk-shade-25: rgba(31, 32, 65, 0.25);
+}
+
+body {
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+  font-family: var(--main-font);
+  font-size: var(--main-font-size);
+  font-weight: var(--main-font-weight);
+  font-weight: var(--main-font-style);
+}
