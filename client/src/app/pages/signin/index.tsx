@@ -1,4 +1,5 @@
 import { TextField } from "../../ui/text_field";
+import { Radio } from "../../ui/radio";
 
 export const SignIn = () => {
   return (
@@ -20,6 +21,10 @@ export const SignIn = () => {
         placeholder='last name...'
         className='signin__text-field'
       />
+      <div className='signin__radios'>
+        <Radio name='sex' id='male' label='Male' />
+        <Radio name='sex' id='female' label='Female' />
+      </div>
     </form>
   );
 };
