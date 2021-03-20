@@ -1,0 +1,29 @@
+.text-field {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  &__label {
+    font-weight: bold;
+    font-size: toRem(12);
+    line-height: toRem(15);
+    text-transform: uppercase;
+    color: var(--drk-shade-100);
+    margin-bottom: 5px;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 13px 0px 13px 15px;
+    background: #ffffff;
+    border: 1px solid rgba(31, 32, 65, 0.25);
+    border-radius: 4px;
+    &::placeholder {
+      font-size: toRem(14);
+      line-height: toRem(18);
+      color: var(--drk-shade-25);
+    }
+  }
+}
