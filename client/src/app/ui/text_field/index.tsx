@@ -7,7 +7,7 @@ interface ITextField {
   className?: string;
   placeholder?: string;
   name: string;
-  value: string;
+  value?: string;
   onChange: (e: any) => void;
 }
 
@@ -21,6 +21,7 @@ export const TextField: FC<ITextField> = ({
   value = "",
   onChange,
 }) => {
+  console.log("value", value);
   return (
     <div className={`text-field ${className}`}>
       <label className='text-field__label' htmlFor={id}>

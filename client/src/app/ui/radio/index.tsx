@@ -7,6 +7,7 @@ interface IRadio {
   name: string;
   value: string;
   onChange: (e: any) => void;
+  isChecked: boolean;
 }
 
 export const Radio: FC<IRadio> = ({
@@ -16,6 +17,7 @@ export const Radio: FC<IRadio> = ({
   name = "",
   value = "",
   onChange,
+  isChecked,
 }) => {
   return (
     <div className={`radio ${className}`}>
@@ -26,6 +28,7 @@ export const Radio: FC<IRadio> = ({
         id={id}
         name={name}
         onChange={onChange}
+        checked={isChecked}
       />
       <label className='radio__label' htmlFor={id}>
         <span className='radio__box'></span>

@@ -1,11 +1,32 @@
-import { useState, SyntheticEvent } from "react";
+import { useState, SyntheticEvent, useEffect } from "react";
 import { TextField } from "../../ui/text_field";
 import { Radio } from "../../ui/radio";
 
-export const SignIn = () => {
-  const [fields, setFields] = useState({ name: "", lastname: "", sex: "" });
+interface IInitState {
+  username: string;
+  userlastname: string;
+  sex: string;
+}
+
+const useSignInForm = (init: IInitState) => {
+  console.log("update");
+
+  const getDataFromLocStorage = () => {
+    const state = window.localStorage.getItem("fields");
+    if (state) {
+      const data = JSON.parse(state);
+      if (typeof data === "object") return data;
+    }
+    return init;
+  };
+
+  const [fields, setFields] = useState<IInitState>(getDataFromLocStorage);
+
+  useEffect(() => {
+    window.localStorage.setItem("fields", JSON.stringify(fields));
+  }, [fields]);
+
   const useSetField = (e: SyntheticEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.name, e.currentTarget.value);
     const field = e.currentTarget.name;
     const value = e.currentTarget.value;
     setFields((prev) => ({
@@ -14,8 +35,18 @@ export const SignIn = () => {
     }));
   };
 
-  const { name, lastname, sex } = fields;
-  console.log(name, lastname, sex);
+  return { fields, useSetField };
+};
+
+export const SignIn = () => {
+  const { fields, useSetField } = useSignInForm({
+    username: "",
+    userlastname: "",
+    sex: "",
+  });
+
+  const { username, userlastname, sex } = fields;
+  console.log("fields", fields);
   return (
     <form action='' className='signin'>
       <h2 className='signin__title'>Account Registration</h2>
@@ -26,7 +57,7 @@ export const SignIn = () => {
         label='User name'
         placeholder='name...'
         className='signin__text-field'
-        value={name}
+        value={username}
         onChange={useSetField}
       />
       <TextField
@@ -36,7 +67,7 @@ export const SignIn = () => {
         label='User last name'
         placeholder='last name...'
         className='signin__text-field'
-        value={lastname}
+        value={userlastname}
         onChange={useSetField}
       />
       <div className='signin__radios'>
@@ -46,6 +77,7 @@ export const SignIn = () => {
           label='Male'
           value='male'
           onChange={useSetField}
+          isChecked={sex === "male"}
         />
         <Radio
           name='sex'
@@ -53,6 +85,7 @@ export const SignIn = () => {
           label='Female'
           value='female'
           onChange={useSetField}
+          isChecked={sex === "female"}
         />
       </div>
     </form>
