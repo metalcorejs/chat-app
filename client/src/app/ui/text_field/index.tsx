@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, SyntheticEvent } from "react";
 
 interface ITextField {
   type: string;
@@ -7,6 +7,8 @@ interface ITextField {
   className?: string;
   placeholder?: string;
   name: string;
+  value: string;
+  onChange: (e: any) => void;
 }
 
 export const TextField: FC<ITextField> = ({
@@ -16,6 +18,8 @@ export const TextField: FC<ITextField> = ({
   className = "",
   placeholder = "",
   name = "",
+  value = "",
+  onChange,
 }) => {
   return (
     <div className={`text-field ${className}`}>
@@ -28,6 +32,8 @@ export const TextField: FC<ITextField> = ({
         placeholder={placeholder}
         id={id}
         name={name}
+        value={value}
+        onChange={onChange}
       />
     </div>
   );
